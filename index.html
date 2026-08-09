@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Data Center - DPMPTSP Gunungkidul</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+
+    <header class="bg-blue-900 text-white shadow-md py-6 px-8">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-2xl font-bold">Data Center & Monitoring Bidang</h1>
+            <p class="text-blue-200 text-sm mt-1">DPMPTSP Kabupaten Gunungkidul</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto p-6 mt-6">
+        <div class="mb-6">
+            <h2 class="text-xl font-semibold text-gray-800">Pilih Bidang / Subbagian</h2>
+            <p class="text-gray-500 text-sm">Direktori terpadu arsip dokumen dinas.</p>
+        </div>
+
+        <!-- Tempat wadah kartu bidang akan digambar secara otomatis oleh JavaScript -->
+        <div id="container-bidang" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </main>
+
+    <!-- Panggil file data Anda -->
+    <script src="data.js"></script>
+    
+    <!-- Skrip otomatis perakit tampilan -->
+    <script>
+        const container = document.getElementById('container-bidang');
+
+        dataFolderDinas.forEach(bidang => {
+            let htmlTahunan = '';
+
+            bidang.tahunan.forEach(item => {
+                let htmlSubFolder = item.subFolder.map(sub => 
+                    `<a href="${sub.link}" target="_blank" class="bg-gray-100 hover:bg-blue-50 hover:text-blue-600 p-2 rounded text-center transition block">${sub.nama}</a>`
+                ).join('');
+
+                htmlTahunan += `
+                    <div class="mt-3">
+                        <div class="text-xs font-semibold text-blue-600 uppercase tracking-wider mb-1">Tahun ${item.tahun}</div>
+                        <div class="grid grid-cols-2 gap-2 text-sm">${htmlSubFolder}</div>
+                    </div>
+                `;
+            });
+
+            const card = `
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition">
+                    <h3 class="font-bold text-lg text-gray-800 mb-1">${bidang.namaBidang}</h3>
+                    <p class="text-xs text-gray-500 mb-4">${bidang.deskripsi}</p>
+                    ${htmlTahunan || `<a href="${bidang.folderUtama}" target="_blank" class="inline-block bg-blue-600 text-white text-xs px-3 py-2 rounded hover:bg-blue-700 transition">Buka Folder Utama &rarr;</a>`}
+                </div>
+            `;
+            container.innerHTML += card;
+        });
+    </script>
+</body>
+</html>
