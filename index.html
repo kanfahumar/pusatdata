@@ -20,11 +20,11 @@
     <main class="max-w-4xl mx-auto p-6 mt-6">
         <div class="mb-6">
             <h2 class="text-xl font-semibold text-gray-800">Direktori Bidang</h2>
-            <p class="text-gray-500 text-sm">Klik pada salah satu bidang untuk melihat pilihan tahun arsip.</p>
+            <p class="text-gray-500 text-sm">Klik pada salah satu bidang untuk menjelajahi arsip.</p>
         </div>
 
         <!-- Wadah utama tempat data digambar otomatis -->
-        <div class="space-y-3" id="direktori-container"></div>
+        <div class="space-y-4" id="direktori-container"></div>
     </main>
 
     <footer class="text-center py-8 text-gray-400 text-xs mt-12 border-t border-gray-200">
@@ -38,26 +38,26 @@
     <script>
         const container = document.getElementById('direktori-container');
 
-        // Merakit elemen HTML secara otomatis dari data.js
-        direktoriDinas.forEach((bidang) => {
-            let htmlTahunan = '';
-
-            bidang.tahunan.forEach((t) => {
+        // Fungsi bantuan untuk merakit HTML Tahunan (agar tidak ditulis berulang-ulang)
+        function renderTahunan(daftarTahun, parentId) {
+            let html = '';
+            daftarTahun.forEach((t) => {
                 let htmlSubFolder = t.subFolder.map(sub => `
                     <a href="${sub.link}" target="_blank" 
-                       class="bg-gray-50 hover:bg-blue-600 hover:text-white border border-gray-200 p-2.5 rounded-lg text-center transition text-sm font-medium shadow-2xs block">
+                       class="bg-gray-50 hover:bg-blue-600 hover:text-white border border-gray-200 p-2.5 rounded-lg text-center transition text-sm font-medium shadow-sm block">
                        ${sub.nama}
                     </a>
                 `).join('');
 
-                htmlTahunan += `
-                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-2xs">
-                        <button onclick="toggleSub('${bidang.id}-tahun-${t.tahun}')" 
-                                class="w-full flex justify-between items-center p-4 text-left font-semibold text-gray-700 hover:bg-gray-50 transition">
+                const accordionId = `${parentId}-tahun-${t.tahun}`;
+                html += `
+                    <div class="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm mt-2">
+                        <button onclick="toggleSub('${accordionId}')" 
+                                class="w-full flex justify-between items-center p-3 px-4 text-left font-semibold text-gray-700 hover:bg-gray-50 transition">
                             <span class="text-sm">Tahun ${t.tahun}</span>
                             <span class="text-gray-400 text-xs">Ketuk untuk lihat arsip</span>
                         </button>
-                        <div id="${bidang.id}-tahun-${t.tahun}" class="hidden p-4 border-t border-gray-100 bg-gray-50/50">
+                        <div id="${accordionId}" class="hidden p-4 border-t border-gray-100 bg-gray-50/50">
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                                 ${htmlSubFolder}
                             </div>
@@ -65,20 +65,49 @@
                     </div>
                 `;
             });
+            return html;
+        }
 
+        // Merakit elemen utama dari data.js
+        direktoriDinas.forEach((bidang) => {
+            let htmlKontenBidang = '';
+
+            // Cek apakah bidang ini memiliki Sub Tim Kerja
+            if (bidang.timKerja && bidang.timKerja.length > 0) {
+                bidang.timKerja.forEach((tim) => {
+                    let isiTahunanTim = renderTahunan(tim.tahunan, tim.id);
+                    htmlKontenBidang += `
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shadow-sm mt-3">
+                            <button onclick="toggleSub('${tim.id}-main')" 
+                                    class="w-full flex justify-between items-center p-3 px-4 text-left font-semibold text-blue-800 hover:bg-blue-50 transition border-b border-gray-200">
+                                <span>${tim.namaTim}</span>
+                            </button>
+                            <div id="${tim.id}-main" class="hidden p-3 bg-white space-y-2">
+                                ${isiTahunanTim}
+                            </div>
+                        </div>
+                    `;
+                });
+            } 
+            // Jika tidak ada Tim Kerja, langsung tampilkan Tahun
+            else if (bidang.tahunan && bidang.tahunan.length > 0) {
+                htmlKontenBidang = renderTahunan(bidang.tahunan, bidang.id);
+            }
+
+            // Gabungkan ke Kartu Bidang Utama
             const cardHTML = `
-                <div class="bg-white rounded-xl shadow-xs border border-gray-200 overflow-hidden transition">
+                <div class="bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden transition">
                     <button onclick="toggleSub('${bidang.id}-main')" 
                             class="w-full flex justify-between items-center p-5 text-left hover:bg-blue-50/40 transition">
                         <div>
                             <h3 class="font-bold text-lg text-gray-800">${bidang.namaBidang}</h3>
                             <p class="text-xs text-gray-500 mt-0.5">${bidang.deskripsi}</p>
                         </div>
-                        <span class="text-blue-600 text-sm font-medium bg-blue-50 px-3 py-1 rounded-full shrink-0 ml-4"></span>
+                        <span class="text-blue-600 text-sm font-medium bg-blue-100 px-3 py-1 rounded-full shrink-0 ml-4">Buka</span>
                     </button>
                     
-                    <div id="${bidang.id}-main" class="hidden p-4 border-t border-gray-100 bg-gray-50 space-y-3">
-                        ${htmlTahunan}
+                    <div id="${bidang.id}-main" class="hidden p-4 border-t border-gray-100 bg-gray-50">
+                        ${htmlKontenBidang}
                     </div>
                 </div>
             `;
@@ -86,7 +115,7 @@
             container.innerHTML += cardHTML;
         });
 
-        // Fungsi buka-tutup otomatis (toggle) yang bersih tanpa tombol "tutup"
+        // Fungsi buka-tutup (toggle)
         function toggleSub(id) {
             const el = document.getElementById(id);
             if (el.classList.contains('hidden')) {
