@@ -18,9 +18,6 @@ const dataFolderDinas = [
                 subFolder: [
                     { nama: "Dokumentasi", link: "LINK_GDRIVE_DOKUMENTASI_2025" },
                     { nama: "SPJ", link: "LINK_GDRIVE_SPJ_2025" }
-                { nama: "Data", link: "LINK_GDRIVE_DATA_2026" },
-                    { nama: "Keuangan", link: "LINK_GDRIVE_KEUANGAN_2026" }
-        
                 ]
             }
             // Nanti jika ingin tambah tahun 2027, cukup copy-paste blok tahun di atas ke sini dengan sangat mudah!
