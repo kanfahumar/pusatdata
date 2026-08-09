@@ -1,8 +1,7 @@
-const dataFolderDinas = [
+const direktoriDinas = [
     {
+        id: "pm",
         namaBidang: "Penanaman Modal (PM)",
-        deskripsi: "Arsip kegiatan, SPJ, data, dan keuangan.",
-        folderUtama: "LINK_GDRIVE_UTAMA_PM",
         tahunan: [
             {
                 tahun: "2026",
@@ -17,17 +16,71 @@ const dataFolderDinas = [
                 tahun: "2025",
                 subFolder: [
                     { nama: "Dokumentasi", link: "LINK_GDRIVE_DOKUMENTASI_2025" },
-                    { nama: "SPJ", link: "LINK_GDRIVE_SPJ_2025" }
+                    { nama: "SPJ", link: "LINK_GDRIVE_SPJ_2025" },
+                    { nama: "Data", link: "LINK_GDRIVE_DATA_2025" },
+                    { nama: "Keuangan", link: "LINK_GDRIVE_KEUANGAN_2025" }
                 ]
             }
-            // Nanti jika ingin tambah tahun 2027, cukup copy-paste blok tahun di atas ke sini dengan sangat mudah!
         ]
     },
     {
-        namaBidang: "Perencanaan & Keuangan",
-        deskripsi: "Pusat data anggaran dan perencanaan.",
-        folderUtama: "LINK_GDRIVE_KEUANGAN",
-        tahunan: [] // Bisa diisi dengan pola yang sama jika ada subfolder tahunan
+        id: "keuangan",
+        namaBidang: "Perencanaan dan Keuangan",
+        tahunan: [
+            {
+                tahun: "2026",
+                subFolder: [
+                    { nama: "Dokumentasi", link: "LINK_GDRIVE_..." },
+                    { nama: "SPJ", link: "LINK_GDRIVE_..." },
+                    { nama: "Data", link: "LINK_GDRIVE_..." },
+                    { nama: "Keuangan", link: "LINK_GDRIVE_..." }
+                ]
+            }
+        ]
+    },
+    {
+        id: "umum",
+        namaBidang: "Umum",
+        tahunan: [
+            {
+                tahun: "2026",
+                subFolder: [
+                    { nama: "Dokumentasi", link: "LINK_GDRIVE_..." },
+                    { nama: "SPJ", link: "LINK_GDRIVE_..." },
+                    { nama: "Data", link: "LINK_GDRIVE_..." },
+                    { nama: "Keuangan", link: "LINK_GDRIVE_..." }
+                ]
+            }
+        ]
+    },
+    {
+        id: "ptsp1",
+        namaBidang: "PTSP 1",
+        tahunan: [
+            {
+                tahun: "2026",
+                subFolder: [
+                    { nama: "Dokumentasi", link: "LINK_GDRIVE_..." },
+                    { nama: "SPJ", link: "LINK_GDRIVE_..." },
+                    { nama: "Data", link: "LINK_GDRIVE_..." },
+                    { nama: "Keuangan", link: "LINK_GDRIVE_..." }
+                ]
+            }
+        ]
+    },
+    {
+        id: "ptsp2",
+        namaBidang: "PTSP 2",
+        tahunan: [
+            {
+                tahun: "2026",
+                subFolder: [
+                    { nama: "Dokumentasi", link: "LINK_GDRIVE_..." },
+                    { nama: "SPJ", link: "LINK_GDRIVE_..." },
+                    { nama: "Data", link: "LINK_GDRIVE_..." },
+                    { nama: "Keuangan", link: "LINK_GDRIVE_..." }
+                ]
+            }
+        ]
     }
-    // Bidang lain (Umum, PTSP 1, PTSP 2) tinggal ditambahkan di sini
 ];
