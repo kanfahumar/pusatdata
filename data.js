@@ -6,7 +6,7 @@ const direktoriDinas = [
         timKerja: [
             {
                 id: "pm-tim1",
-                namaTim: "Tim Kerja 1",
+                namaTim: "Pengembangan Iklim Investasi",
                 tahunan: [
                     {
                         tahun: "2026",
@@ -21,14 +21,14 @@ const direktoriDinas = [
             },
             {
                 id: "pm-tim2",
-                namaTim: "Tim Kerja 2",
+                namaTim: "Promosi Investasi",
                 tahunan: [
                     {
                         tahun: "2026",
                         subFolder: [
-                            { nama: "Dokumentasi", link: "#" },
-                            { nama: "SPJ", link: "#" },
-                            { nama: "Data", link: "#" },
+                            { nama: "Dokumentasi", link: "https://drive.google.com/drive/folders/1--QXq6QFA-zXLvGURcpL_n7EZDfiNGHX?usp=drive_link" },
+                            { nama: "SPJ", link: "https://drive.google.com/drive/folders/1FRxD8ug4LJbz0dpTSFnxYY5FE_0xqUnr?usp=drive_link" },
+                            { nama: "Data", link: "https://drive.google.com/drive/folders/195q1I1OYfyDr-u42ZJGW6uP0tyD4W33t?usp=drive_link" },
                             { nama: "Keuangan", link: "#" }
                         ]
                     }
@@ -39,11 +39,11 @@ const direktoriDinas = [
     {
         id: "ptsp1",
         namaBidang: "PTSP 1",
-        deskripsi: "Arsip pelayanan perizinan dan non-perizinan jalur pertama.",
+        deskripsi: "Arsip kegiatan, SPJ, data, dan keuangan PTSP I.",
         timKerja: [
             {
                 id: "ptsp1-tim1",
-                namaTim: "Tim Kerja 1",
+                namaTim: "Pelayanan",
                 tahunan: [
                     {
                         tahun: "2026",
@@ -58,7 +58,7 @@ const direktoriDinas = [
             },
             {
                 id: "ptsp1-tim2",
-                namaTim: "Tim Kerja 2",
+                namaTim: "Data",
                 tahunan: [
                     {
                         tahun: "2026",
@@ -76,11 +76,11 @@ const direktoriDinas = [
     {
         id: "ptsp2",
         namaBidang: "PTSP 2",
-        deskripsi: "Arsip pelayanan perizinan dan pengaduan jalur kedua.",
+        deskripsi: "Arsip kegiatan, SPJ, data, dan keuangan PTSP II.",
         timKerja: [
             {
                 id: "ptsp2-tim1",
-                namaTim: "Tim Kerja 1",
+                namaTim: "Tim Kerja Pengawasan",
                 tahunan: [
                     {
                         tahun: "2026",
@@ -95,7 +95,7 @@ const direktoriDinas = [
             },
             {
                 id: "ptsp2-tim2",
-                namaTim: "Tim Kerja 2",
+                namaTim: "Tim Kerja Pengaduan",
                 tahunan: [
                     {
                         tahun: "2026",
@@ -113,7 +113,7 @@ const direktoriDinas = [
     {
         id: "keuangan",
         namaBidang: "Perencanaan dan Keuangan",
-        deskripsi: "Pusat data anggaran, perencanaan program, dan laporan keuangan.",
+        deskripsi: "Arsip kegiatan, SPJ, data, dan keuangan.",
         tahunan: [
             {
                 tahun: "2026",
